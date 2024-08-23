@@ -3,25 +3,28 @@ import Message from "../models/message.model.js";
 
 export const getMessage = async (req, res) => {
     try {
+        const { message } = req.body;
         const {id: userToChatId} = req.params;  // user with whom you'd like to chat
         const senderId = req.user._id;
-        const conversation = await Conversation.findOne({
+        
+        let conversation = await Conversation.findOne({
             participants : {$all : [senderId, userToChatId]}
-        }).populate("messages"); // not reference but each message one by one
+        }).populate("messages"); // populate each message one by one
 
         if(!conversation) {
-            res.status(200).json([]);
+            // res.status(200).json([]);
+            return res.status(200).json([]);
         }
 
         const messages = conversation.messages;
-        res.status(200).json(messages);
+        res.status(200).json(messages); // Ensure only one response is sent
 
 
     } catch (error) {
         console.log("Error in getMessage controller :", error.message);
         res.status(500).json({message : "Internal Server Error"})
     }
-}
+};
 
 export const sendMessage = async (req, res) => {
     // console.log("message sent", req.params.id);

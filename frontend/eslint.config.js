@@ -33,6 +33,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "react/prop-types" : "off",
+      // no errors in prop types
     },
   },
 ]
