@@ -1,13 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext";
 
 const useLogin = () => {
-    
-  useEffect(() => {
-    document.title = "BuzzConnect"; // Change the title dynamically
-    
-  }, []);
     const [loading, setLoading] = useState(false);
     const {setAuthUser} = useAuthContext();
     const login = async (username, password) => {
