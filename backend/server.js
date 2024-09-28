@@ -1,5 +1,5 @@
 // to be able to use the import keyword, in package.json include "types" : "modules"
-
+import path from "path";
 import express from "express";  // used to create server
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";    // access configuration values securely
@@ -18,6 +18,7 @@ dotenv.config();  // load the environment variables from a .env file
 // const app = express(); // instance of an express application
 const PORT = process.env.PORT || 5000;    // sets the port number for the server to listen on
 
+const __dirname = path.resolve();
 // test route
 // app.get("/", (req, res)=> {
 //     // root route : http://localhost:5000/
@@ -31,6 +32,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes)
 
+app.use(express.static(path.join(__dirname, "/frontend/dist")))
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"))
+})
 
 // starting the SERVER
 server.listen(PORT, () => {
