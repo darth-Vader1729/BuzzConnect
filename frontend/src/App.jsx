@@ -5,8 +5,13 @@ import LogIn from "./pages/login/LogIn.jsx";
 import SignUp from "./pages/signup/SignUp.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext.jsx";
+import { useEffect } from "react";
+
 
 function App() {
+  useEffect(() => {
+    document.title = "BuzzConnect"; // Change the title dynamically
+  }, []);
   const {authUser} = useAuthContext();
   
   return (
