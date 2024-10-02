@@ -1,7 +1,7 @@
 {
-  "name": "project1",
+  "name": "buzzconnect",
   "version": "1.0.0",
-  "description": "",
+  "description": "my first ChatApp app",
   "main": "server.js",
   "scripts": {
     "server": "nodemon backend/server.js",
